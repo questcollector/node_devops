@@ -4,8 +4,10 @@
   "description": "DevOps implementation with nodejs, github, jenkins, docker",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app",
-    "test": "nodemon app"
+    "start:production": "cross-env NODE_ENV=production node ./app.js",
+    "start:dev": "cross-env NODE_ENV=dev node ./app.js",
+    "start:test": "cross-env NODE_ENV=test node ./app.js",
+    "test": "mocha"
   },
   "keywords": [
     "nodejs"
@@ -13,9 +15,11 @@
   "author": "kiyoung.you",
   "license": "MIT",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "mocha": "^9.1.3",
     "nodemon": "^2.0.14"
   }
 }

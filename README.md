@@ -3,4 +3,9 @@
 - node.js
 - github
 - jenkins
-- docker
+- docker# node_devops
+# DevOps study with
+- application(simple node.js express app)
+- devOps(Github)
+- CI tool(jenkins)
+- container image build(docker)
