@@ -40,6 +40,7 @@ node {
             
             def gitURL = "https://github.com/questcollector/node_gitops.git"
             sh "git clone ${gitURL}"
+            sh "git config --global user.email '${GIT_USER}@hanmail.net'"
             sh "git config --global user.name '${GIT_USER}'"
 
             dir("node_gitops") {
