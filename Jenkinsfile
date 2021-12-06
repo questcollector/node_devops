@@ -31,23 +31,21 @@ node {
     
 
     stage('Deploy to gitOps Repository') {
-        steps {
-            withCredentials([
-                usernamePassword(
-                    credentialsId: 'miroirs-git', 
-                    usernameVariable: 'GIT_USER', 
-                    passwordVariable: 'GIT_PWD')
-                    ]) {
-                
-                def gitURL = "https://${GIT_USER}:${GIT_PWD}github.com/questcollector/node_gitops.git"
-                sh "git clone ${gitURL}"
-                sh "git config --global user.email '${GIT_USER}'"
+        withCredentials([
+            usernamePassword(
+                credentialsId: 'miroirs-git', 
+                usernameVariable: 'GIT_USER', 
+                passwordVariable: 'GIT_PWD')
+                ]) {
+            
+            def gitURL = "https://${GIT_USER}:${GIT_PWD}github.com/questcollector/node_gitops.git"
+            sh "git clone ${gitURL}"
+            sh "git config --global user.email '${GIT_USER}'"
 
-                dir("node_gitops") {
-                    sh "cd ./overlays/dev && kustomize edit set image ${dockerRepo}/${imageName}:${imageTag}"
-                    sh "git commit -am 'Publish new version ${imageTag} to dev' && git push"
-                }
+            dir("node_gitops") {
+                sh "cd ./overlays/dev && kustomize edit set image ${dockerRepo}/${imageName}:${imageTag}"
+                sh "git commit -am 'Publish new version ${imageTag} to dev' && git push"
             }
-        }
+        }    
     }
 }
