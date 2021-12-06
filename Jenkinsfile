@@ -31,15 +31,17 @@ node {
     
 
     stage('Deploy to gitOps Repository') {
-        def gitURL = "https://github.com/questcollector/node_gitops.git"
-        sh "rm -Rf ./node_gitops"
-        sh "git clone ${gitURL}"
-        sh "git config --global user.email 'miroirs@hanmail.net'"
-        sh "git config --global user.name 'miroirs'"
+        withCredentials([string(credentialsId: 'GitHub-token', variable: 'GIT_TOKEN')]) {
+            def gitURL = "https://${GIT_TOKEN}@github.com/questcollector/node_gitops.git"
+            sh "rm -Rf ./node_gitops"
+            sh "git clone ${gitURL}"
+            sh "git config --global user.email 'miroirs@hanmail.net'"
+            sh "git config --global user.name 'miroirs'"
 
-        dir("node_gitops") {
-            sh "cd ./overlays/dev && kustomize edit set image ${dockerRepo}/${imageName}:${imageTag}"
-            sh "git commit -am 'Publish new version ${imageTag} to dev' && git push"
-        } 
+            dir("node_gitops") {
+                sh "cd ./overlays/dev && kustomize edit set image ${dockerRepo}/${imageName}:${imageTag}"
+                sh "git commit -am 'Publish new version ${imageTag} to dev' && git push"
+            }
+        }         
     }
 }
