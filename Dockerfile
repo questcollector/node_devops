@@ -4,7 +4,7 @@ RUN mkdir -p /node_devops/app
 WORKDIR /node_devops/app
 COPY package.json .
 COPY yarn.lock .
-COPY *.js .
+COPY *.js ./
 
 # --- DEPENDENCIES ---
 FROM base AS dependencies
