@@ -38,7 +38,7 @@ node {
                 passwordVariable: 'GIT_PWD')
                 ]) {
             
-            def gitURL = "https://${GIT_USER}:${GIT_PWD}github.com/questcollector/node_gitops.git"
+            def gitURL = "https://${GIT_USER}:${GIT_PWD}@github.com/questcollector/node_gitops.git"
             sh "git clone ${gitURL}"
             sh "git config --global user.email '${GIT_USER}'"
 
