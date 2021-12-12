@@ -11,7 +11,7 @@
 ## reference
   - https://kangwoo.kr/2019/12/18/gitops-and-kubernetes/
     <br> devops/gitops 구성
-  - https://kangwoo.kr/2019/12/18/gitops-and-kubernetes/
+  - https://velog.io/@sdg9670/Dockerizing-a-Node.js
     <br> node app image build
   - https://www.jenkins.io/doc/book/installing/docker/
     <br> jenkins install - docker
